@@ -1,0 +1,56 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  summaries Summary[]
+
+  @@map("users")
+}
+
+model Summary {
+  id            String  @id @default(cuid())
+  transcript    String
+  prompt        String
+  aiSummary     String
+  editedSummary String?
+  model         String  @default("llama3-70b-8192")
+  tokensIn      Int?
+  tokensOut     Int?
+  status        String  @default("completed") // pending, completed, failed
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Optional user association
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  shares Share[]
+
+  @@map("summaries")
+}
+
+model Share {
+  id        String   @id @default(cuid())
+  summaryId String
+  summary   Summary  @relation(fields: [summaryId], references: [id], onDelete: Cascade)
+  recipients String[] // Array of email addresses
+  subject   String?
+  bodyHtml  String
+  createdAt DateTime @default(now())
+
+  @@map("shares")
+}

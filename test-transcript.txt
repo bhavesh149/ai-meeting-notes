@@ -1,0 +1,33 @@
+Meeting: Weekly Team Standup
+Date: August 16, 2025
+Attendees: John (Product Manager), Sarah (Developer), Mike (Designer), Lisa (QA)
+
+John: Good morning everyone. Let's start with our weekly standup. Sarah, what did you work on this week?
+
+Sarah: Hi everyone. This week I focused on implementing the new user authentication system. I completed the login and registration functionality, and I'm about 80% done with the password reset feature. I should have that finished by tomorrow.
+
+Mike: That's great progress, Sarah. I've been working on the new dashboard design. I completed the wireframes and mockups for the main dashboard page. I also conducted user testing sessions with 5 participants, and the feedback was mostly positive. The users liked the clean interface, but they suggested adding more visual indicators for important notifications.
+
+Lisa: Excellent work, Mike. On the QA side, I finished testing the shopping cart functionality that was completed last week. I found 3 minor bugs which I've logged in our tracking system. Two of them are UI-related and one is a calculation error in the discount logic. I also started preparing test cases for Sarah's authentication system.
+
+John: Thanks everyone. For next week, Sarah, please prioritize finishing the password reset feature and then move on to the user profile management. Mike, can you incorporate the feedback from user testing and prepare the final designs? Lisa, please continue with the authentication testing once Sarah's feature is ready.
+
+Sarah: Sounds good. I'll have the password reset done by tomorrow and can start on user profiles.
+
+Mike: Absolutely. I'll revise the designs based on the feedback and should have the final version ready by Wednesday.
+
+Lisa: Perfect. I'll be ready to test the authentication system as soon as it's deployed to the development environment.
+
+John: Great. Any blockers or issues anyone wants to discuss?
+
+Mike: Actually, yes. I'm waiting for the new brand guidelines from the marketing team. They promised to deliver them last week, but I haven't received them yet. This might delay the final design approval.
+
+John: I'll follow up with marketing today and make sure you get the guidelines by tomorrow. Anything else?
+
+Lisa: No blockers from my end. Everything is on track.
+
+Sarah: Same here, no issues.
+
+John: Excellent. Let's plan to meet again next Friday at the same time. Have a great week everyone!
+
+All: Thanks, bye!
