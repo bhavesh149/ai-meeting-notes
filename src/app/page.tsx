@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef } from "react"
 import Link from "next/link"
-import { Plus, Calendar, Clock, FileText, Share2, Eye, Loader2 } from "lucide-react"
+import { Plus, Calendar, Clock, FileText, Trash2, Eye, Loader2, Share2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { summariesApi, Summary, PaginatedResponse } from "@/lib/api"
@@ -37,7 +37,6 @@ export default function HomePage() {
   const [isLoading, setIsLoading] = useState(true)
   const [isLoadingMore, setIsLoadingMore] = useState(false)
   const [totalCount, setTotalCount] = useState(0)
-  const [currentPage, setCurrentPage] = useState(1)
   const [hasMore, setHasMore] = useState(true)
   const observer = useRef<IntersectionObserver | null>(null)
 
@@ -147,15 +146,12 @@ export default function HomePage() {
     if (observer.current) observer.current.disconnect()
     observer.current = new IntersectionObserver(entries => {
       if (entries[0].isIntersecting && hasMore) {
-        setCurrentPage(prevPage => {
-          const nextPage = prevPage + 1
-          loadSummaries(nextPage, true)
-          return nextPage
-        })
+        const nextPage = Math.floor(summaries.length / 10) + 1
+        loadSummaries(nextPage, true)
       }
     })
     if (node) observer.current.observe(node)
-  }, [isLoadingMore, hasMore, loadSummaries])
+  }, [isLoadingMore, hasMore, loadSummaries, summaries.length])
 
   // Initial load
   useEffect(() => {
@@ -164,16 +160,15 @@ export default function HomePage() {
 
   // Function to refresh data (for when summaries are created/deleted)
   const refreshSummaries = useCallback(() => {
-    setCurrentPage(1)
     setHasMore(true)
     loadSummaries(1, false)
   }, [loadSummaries])
 
   // Make refresh function available globally for other components
   useEffect(() => {
-    (window as any).refreshSummaries = refreshSummaries
+    (window as unknown as { refreshSummaries?: () => void }).refreshSummaries = refreshSummaries
     return () => {
-      delete (window as any).refreshSummaries
+      delete (window as unknown as { refreshSummaries?: () => void }).refreshSummaries
     }
   }, [refreshSummaries])
 
@@ -384,7 +379,7 @@ export default function HomePage() {
               {!hasMore && summaries.length > 0 && (
                 <div className="flex justify-center py-8">
                   <span className="text-sm text-gray-600">
-                    You've reached the end of your summaries
+                    You&apos;ve reached the end of your summaries
                   </span>
                 </div>
               )}

@@ -117,8 +117,8 @@ export default function SummaryViewPage() {
       await summariesApi.delete(summaryId)
       
       // Refresh the dashboard to update the count
-      if (typeof window !== 'undefined' && (window as any).refreshSummaries) {
-        (window as any).refreshSummaries()
+      if (typeof window !== 'undefined' && (window as unknown as { refreshSummaries?: () => void }).refreshSummaries) {
+        (window as unknown as { refreshSummaries: () => void }).refreshSummaries()
       }
       
       toast({

@@ -68,8 +68,8 @@ export default function NewSummaryPage() {
       setSummaryId(result.id)
       
       // Refresh the dashboard to show the new summary
-      if (typeof window !== 'undefined' && (window as any).refreshSummaries) {
-        (window as any).refreshSummaries()
+      if (typeof window !== 'undefined' && (window as unknown as { refreshSummaries?: () => void }).refreshSummaries) {
+        (window as unknown as { refreshSummaries: () => void }).refreshSummaries()
       }
       
       toast({
@@ -316,7 +316,7 @@ export default function NewSummaryPage() {
                         No summary yet
                       </h3>
                       <p className="text-gray-600 max-w-sm">
-                        Add your meeting content and click "Generate Summary" to create an AI-powered summary.
+                        Add your meeting content and click &quot;Generate Summary&quot; to create an AI-powered summary.
                       </p>
                     </div>
                   </div>
