@@ -43,12 +43,18 @@ app.use(helmet({
 }));
 
 // CORS configuration
+// app.use(cors({
+//   origin: [WEB_ORIGIN, 'http://localhost:3000', 'http://localhost:3001'],
+//   credentials: true,
+//   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+//   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+// }));
 app.use(cors({
-  origin: [WEB_ORIGIN, 'http://localhost:3000', 'http://localhost:3001'],
-  credentials: true,
+  origin: "*", // allow all domains
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
 }));
+
 
 // Rate limiting
 const limiter = rateLimit({
